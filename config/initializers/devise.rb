@@ -8,6 +8,10 @@ Devise.setup do |config|
   # by default. You can change it below and use your own secret key.
   # config.secret_key = '9311cde68943a396445c073e03a9ef9093816582ef2831d0bba963b17b75b62a2180426235539d042ef8e169c8ddc8b550efc85872fb5d33c82a0a1d8c95c960'
 
+
+  # Uncomment For Devise + Gooogle OAuth
+  #config.omniauth :google_oauth2, "GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", { }
+  
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class

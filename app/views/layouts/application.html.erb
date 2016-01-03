@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>RiseArrowTest</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-  
-<%= yield %>
-
-</body>
+  <head>
+    <title>Google Auth Example App</title>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div>
+      <% if current_user %>
+        Signed in as <strong><%= current_user.email %></strong>!
+        <%= link_to "Sign out", signout_path, id: "sign_out" %>
+      <% else %>
+        <%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2) %>
+      <% end %>
+    </div>
+    <div>
+    <%= yield %>
+    </div>
+  </body>
 </html>
+
+
