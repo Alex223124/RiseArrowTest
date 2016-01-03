@@ -1,0 +1,21 @@
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Test Application For Rise Arrow Team</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+             <% if current_user %>
+               <li><%= link_to "Sign out (#{current_user.email})", signout_path, id: "sign_out" %></li>
+               <li><a href="#">My Emails</a></li>
+      		 <% else %>
+      		   <li><%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2) %></li>
+      		 <% end %>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+
+

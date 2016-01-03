@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Google Auth Example App</title>
+    <title>Test Application For Rise Arrow Team</title>
     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <div>
-      <% if current_user %>
-        Signed in as <strong><%= current_user.email %></strong>!
-        <%= link_to "Sign out", signout_path, id: "sign_out" %>
-      <% else %>
-        <%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2) %>
-      <% end %>
-    </div>
-    <div>
-    <%= yield %>
-    </div>
+  
+    <%= render 'layouts/header' %>
+  
+  <div class="container">
+    <%= render 'layouts/messages' %>
+      <%= yield %>
+    <%= render 'layouts/footer' %>
+  </div>
+  
+
   </body>
 </html>
 
