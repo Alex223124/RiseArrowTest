@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mailer: MyString
+  title: MyString
+  body: MyString
+  data: 2016-01-03 23:37:21
+  main_recipient: MyString
+  other_recipients: MyString
+
+two:
+  mailer: MyString
+  title: MyString
+  body: MyString
+  data: 2016-01-03 23:37:21
+  main_recipient: MyString
+  other_recipients: MyString
