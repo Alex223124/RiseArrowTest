@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :attachments
   #get 'static_pages/index'
   root to: "static_pages#index"
   
