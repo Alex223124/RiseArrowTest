@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
 
+  get 'gmails/connect_and_archive'
+
   resources :attachments
   #get 'static_pages/index'
   root to: "static_pages#index"
   
   resources :sessions, only: [:create, :destroy]
+  
   
   # 1.Это ссылка которая инициирует запрос в гугл бд
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
@@ -13,6 +16,9 @@ Rails.application.routes.draw do
   # провайдер редиректнет его к этому урл, так что мы можем исп-ть данные которые получили
   match '/auth/google_oauth2/callback', :to => 'sessions#create', via: [:get, :post]
   
+  #Второй колбек для почты
+  match '/gmails/connect_and_archive', :to => 'gmails#connect_and_archive', via: [:get, :post]
+
   # Создаёт простую форму входа где юзер увидет Connect with Google link
   get '/login', :to => 'sessions#new', :as => :login 
   # Роут для логаута (кнопки логаута)

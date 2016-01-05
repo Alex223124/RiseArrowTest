@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160103234351) do
+ActiveRecord::Schema.define(version: 20160104162555) do
 
   create_table "attachments", force: :cascade do |t|
     t.string   "filename"
@@ -45,6 +45,8 @@ ActiveRecord::Schema.define(version: 20160103234351) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "access_token"
+    t.string   "refresh_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

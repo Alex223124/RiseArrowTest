@@ -4,4 +4,6 @@ class IncomingMessage < ActiveRecord::Base
   
   belongs_to :user
   has_many :attachments
+
+  
 end
