@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
     
   has_many :incoming_messages
-  has_many :attachments, through: :incoming_messages 
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -15,7 +14,6 @@ class User < ActiveRecord::Base
     credentials = access_token.credentials
     user = User.where(:email => data["email"]).first
   
-    # Uncomment the section below if you want users to be created if they don't exist
      unless user
          #user = User.create(name: data["name"],
          user = User.create(

@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Incoming messages</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>My file</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @incoming_message.each do |example| %>
+      <tr>
+        <td><a href="<%= incoming_message.my_file %>">Donwload</a></td>
+        
+        <td><%= link_to 'Show', incoming_message %></td>
+        <td><%= link_to 'Edit', edit_incoming_message_path(incoming_message) %></td>
+        <td><%= link_to 'Destroy', incoming_message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Example', new_incoming_message_path %>
