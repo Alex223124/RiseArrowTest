@@ -28,7 +28,6 @@ class MailRefresher
     end
   end
 
-
   def process_body(mail) # formatting for body
     if mail.text_part
       mail.text_part.decoded
@@ -51,7 +50,7 @@ class MailRefresher
         res.to_s
       end
    end
-  
+
   def save_attaches(mail) # saving emails attachments 
     attaches_paths = ""
 

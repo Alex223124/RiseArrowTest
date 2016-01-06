@@ -1,5 +1,37 @@
-        <% if incoming_message.attachments.present? %>
-          <% incoming_message.attachments.each do |attach| %>
-            <td><a href="<%= attach %>">Donwload <%= attach %></a></td>
-          <% end %>
-        <% end %>
+<%= render 'shared/errors', obj: @incoming_messages %>
+<%= render 'shared/page_title', title: @incoming_messages.title %>
+
+
+<div class="row">
+  <div class="well col-md-8 col-md-offset-2"> 
+  
+  <p class="message_subject">Subject: <%= @incoming_messages.title %></p>
+	<p class="message_body">Body: <%= @incoming_messages.body %></p>
+	<p class="message_data">Data: <%= @incoming_messages.data %>.</p>
+	<p class="message_mailer"> Author: <%= @incoming_messages.mailer%></p>
+	
+	<% if @incoming_message.other_recipients.present? %>
+    <p class="message_recipients"> Other recipients: <%= @incoming_message.other_recipients%></p>
+  <% end %>
+  
+  <% if @incoming_message.attachments.present? %>
+  Attachments:
+    <% @incoming_message.attachments.each do |attach| %>
+      <p class="message_attachment"><%= attach %></p>
+    <% end %>
+  <% end %>
+
+	<div class="links">
+	  <%= link_to 'Back', incoming_messages_path %>
+	</div> 
+
+</div>
+
+
+      
+
+
+
+
+
+		

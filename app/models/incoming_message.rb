@@ -5,6 +5,7 @@ class IncomingMessage < ActiveRecord::Base
   
   belongs_to :user
   
+  
   def self.refresh_for(user)
     MailRefresher.new(user).refresh
   end

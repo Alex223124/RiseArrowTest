@@ -5,12 +5,12 @@ class IncomingMessagesController < ApplicationController
   
   
   def index
-    @incoming_messages = @user.incoming_messages.paginate(:page => params[:page], :per_page => 30)
+    @incoming_messages = @user.incoming_messages.paginate(:page => params[:page], :per_page => 50)
   end
 
   #показать одно сообщение
   def show
-    
+    @incoming_messages = IncomingMessage.find(params[:id])
   end
   
   # Download button
