@@ -13,8 +13,11 @@
   <tbody>
     <% @incoming_messages.each do |incoming_message| %>
       <tr>
-        <td><a href="<%= incoming_message.attachment %>">Donwload</a></td>
-        
+        <% if incoming_message.attachment.present? %>
+          <% incoming_message.attachment.each do |attach| %>
+            <td><a href="<%= attach %>">Donwload <%= attach %></a></td>
+          <% end %>
+        <% end %>
         <td><%= link_to 'Show', incoming_message %></td>
         <td><%= link_to 'Destroy', incoming_message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

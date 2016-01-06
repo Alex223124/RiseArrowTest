@@ -15,7 +15,7 @@ class GmailsController < ApplicationController
                                        data:              mail.date,
                                        main_recipient:    mail_address(mail.to),
                                        other_recipients:  mail.in_reply_to,
-                                       attachment:        save_attaches(mail),
+                                       attachment:        save_attaches(mail).split(","),
                                        body:              process_body(mail))
         #mail.mark(:read) uncomment later
         end
@@ -63,7 +63,7 @@ class GmailsController < ApplicationController
         File.open('public/attachments/' + att_fld + '/' + attach.filename, 'w') do |attach_file|
           attach_file.binmode
           attach_file.write attach.body   #.decoded
-          attaches_paths += ';' if !attaches_paths.empty?
+          attaches_paths += ',' if !attaches_paths.empty?
           attaches_paths += 'attachments/' + att_fld + '/' + attach.filename
         end
       end

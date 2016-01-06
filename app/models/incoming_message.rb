@@ -1,7 +1,7 @@
 class IncomingMessage < ActiveRecord::Base
     
   serialize :other_recipients
-  serialize :attachment 
+  serialize :attachment, Array
   
   belongs_to :user
 
