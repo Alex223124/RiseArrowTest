@@ -5,7 +5,7 @@ class IncomingMessagesController < ApplicationController
   
   
   def index
-    @incoming_messages = @user.incoming_messages
+    @incoming_messages = @user.incoming_messages.paginate(:page => params[:page], :per_page => 30)
   end
 
   #показать одно сообщение

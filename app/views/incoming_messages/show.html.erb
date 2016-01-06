@@ -1,0 +1,5 @@
+        <% if incoming_message.attachments.present? %>
+          <% incoming_message.attachments.each do |attach| %>
+            <td><a href="<%= attach %>">Donwload <%= attach %></a></td>
+          <% end %>
+        <% end %>

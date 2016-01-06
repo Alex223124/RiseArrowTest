@@ -21,7 +21,7 @@ class MailRefresher
                                        data:              mail.date,
                                        main_recipient:    mail_address(mail.to),
                                        other_recipients:  mail.in_reply_to,
-                                       attachments:        save_attaches(mail).split(","),
+                                       attachments:       save_attaches(mail).split(","),
                                        body:              process_body(mail))
         #mail.mark(:read) uncomment later
       end
