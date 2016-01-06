@@ -1,34 +1,45 @@
 require 'nkf'
 
 class GmailsController < ApplicationController
-  def connect_and_archive
+  
+  def refresh_emails
     @user = current_user
-    @gmail = Gmail.connect(:xoauth2, @user.email, @user.access_token) #  Start an authenticated gmail session
-    
-    mails = @gmail.inbox.emails(:all).map do |mail| # correct later to :unread!
-      email = IncomingMessage.new
-      email.mailer = mail_address(mail.from)
-      email.title = NKF::nkf('-wm', mail.subject.to_s)
-      email.data = mail.date
-      email.main_recipient = mail_address(mail.to)
-      email.other_recipients = mail.in_reply_to
-      email.attachment = save_attaches(mail)
-     
-      #process body
-      if mail.text_part
-        email.body = mail.text_part.decoded
-      elsif mail.html_part
-        email.body = mail.html_part.decoded
-      else
-        email.body = mail.body.decoded.encode("UTF-8", mail.charset) rescue mail.body.to_s
-      end
-      email.save!
+    gmail = Gmail.connect(:xoauth2, @user.email, @user.access_token) #  Start an authenticated gmail session
+    mails = gmail.inbox.emails(:all) # correct later to :unread!
+   
+    if mails.any? # 0 emails?
+      mails.each do |mail|
+        email = IncomingMessage.create(mailer:            mail_address(mail.from),
+                                       title:             NKF::nkf('-wm', mail.subject.to_s),
+                                       data:              mail.date,
+                                       main_recipient:    mail_address(mail.to),
+                                       other_recipients:  mail.in_reply_to,
+                                       attachment:        save_attaches(mail),
+                                       body:              process_body(mail))
+        #mail.mark(:read) uncomment later
+        end
+     # redirect_to incoming_messages_path 
+    else
+      #redirect_to incoming_messages_path, notice: "You haven't unread emails. Please try later"
     end
-   # redirect_to страница где показываются сохраненные письма
   end
 
+     
 
-   def mail_address(adr)  # МЕТОД ДЛЯ ПРЕОБРАЗОВАНИЯ
+  private
+  
+  def process_body(mail) # formatting for body
+      if mail.text_part
+        mail.text_part.decoded
+      elsif mail.html_part
+        mail.html_part.decoded
+      else
+        mail.body.decoded.encode("UTF-8", mail.charset) rescue mail.body.to_s
+      end
+     # email.save!
+  end
+  
+   def mail_address(adr)  # formatting for email adress
       if adr.is_a? Array
         adr.map{ |x| mail_address(x) }.join(', ')
       elsif adr.is_a? Net::IMAP::Address
@@ -40,7 +51,7 @@ class GmailsController < ApplicationController
       end
    end
   
-  def save_attaches(mail)
+  def save_attaches(mail) # saving emails attachments 
     attaches_paths = ""
 
     if mail.attachments.any? #The method returns true if the block ever returns a value other than false or nil.

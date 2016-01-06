@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   match '/auth/google_oauth2/callback', :to => 'sessions#create', via: [:get, :post]
   
   #Второй колбек для почты
-  match '/gmails/connect_and_archive', :to => 'gmails#connect_and_archive', via: [:get, :post]
+  match '/gmails/refresh_emails', :to => 'gmails#refresh_emails', via: [:get, :post]
 
   # Создаёт простую форму входа где юзер увидет Connect with Google link
   get '/login', :to => 'sessions#new', :as => :login 
