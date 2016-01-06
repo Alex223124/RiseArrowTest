@@ -11,12 +11,11 @@
   </thead>
 
   <tbody>
-    <% @incoming_message.each do |example| %>
+    <% @incoming_messages.each do |incoming_message| %>
       <tr>
-        <td><a href="<%= incoming_message.my_file %>">Donwload</a></td>
+        <td><a href="<%= incoming_message.attachment %>">Donwload</a></td>
         
         <td><%= link_to 'Show', incoming_message %></td>
-        <td><%= link_to 'Edit', edit_incoming_message_path(incoming_message) %></td>
         <td><%= link_to 'Destroy', incoming_message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -25,4 +24,4 @@
 
 <br>
 
-<%= link_to 'New Example', new_incoming_message_path %>
+

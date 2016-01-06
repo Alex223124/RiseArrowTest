@@ -9,7 +9,8 @@ class GmailsController < ApplicationController
    
     if mails.any? # 0 emails?
       mails.each do |mail|
-        email = IncomingMessage.create(mailer:            mail_address(mail.from),
+        email = IncomingMessage.create(user_id:           @user.id,
+                                       mailer:            mail_address(mail.from),
                                        title:             NKF::nkf('-wm', mail.subject.to_s),
                                        data:              mail.date,
                                        main_recipient:    mail_address(mail.to),
@@ -18,9 +19,9 @@ class GmailsController < ApplicationController
                                        body:              process_body(mail))
         #mail.mark(:read) uncomment later
         end
-     # redirect_to incoming_messages_path 
+      redirect_to incoming_messages_path 
     else
-      #redirect_to incoming_messages_path, notice: "You haven't unread emails. Please try later"
+      redirect_to incoming_messages_path, notice: "You haven't unread emails. Please try later"
     end
   end
 

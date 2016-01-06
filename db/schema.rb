@@ -20,9 +20,10 @@ ActiveRecord::Schema.define(version: 20160105224950) do
     t.datetime "data"
     t.string   "main_recipient"
     t.string   "other_recipients"
+    t.integer  "user_id"
+    t.string   "attachment"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.string   "attachment"
   end
 
   create_table "users", force: :cascade do |t|
