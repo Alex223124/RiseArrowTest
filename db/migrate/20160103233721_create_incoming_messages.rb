@@ -8,7 +8,7 @@ class CreateIncomingMessages < ActiveRecord::Migration
       t.string :main_recipient
       t.string :other_recipients
       t.integer :user_id
-      t.string :attachment
+      t.string :attachments
       t.timestamps null: false
     end
   end

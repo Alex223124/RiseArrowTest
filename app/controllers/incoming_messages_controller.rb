@@ -1,7 +1,8 @@
 class IncomingMessagesController < ApplicationController
   
   before_action :set_user
-  before_action :set_incoming_message, only: [:show, :destroy]
+  before_action :set_incoming_message, except: [:index, :refresh_emails]
+  
   
   def index
     @incoming_messages = @user.incoming_messages
@@ -12,15 +13,22 @@ class IncomingMessagesController < ApplicationController
     
   end
   
-  # скачать аттачмен сообщения 
+  # Download button
   def download
-    send_data(@incoming_message.attachment) 
+    send_data(@incoming_message.attachments) 
   end
 
   def destroy
     @incoming_message.destroy
-    redirect_to incoming_messages_url, notice: 'Example was successfully destroyed.'
+    redirect_to incoming_messages_url, notice: 'Message was successfully destroyed.'
   end
+  
+  # Refresh button
+  def refresh_emails
+    IncomingMessage.refresh_for(current_user)
+    redirect_to incoming_messages_path, notice: "Your list of emails updated!"
+  end
+
 
   private
 

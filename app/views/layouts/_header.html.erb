@@ -9,7 +9,7 @@
           <ul class="nav navbar-nav navbar-right">
              <% if current_user %>
                <li><%= link_to "Sign out (#{current_user.email})", signout_path, id: "sign_out" %></li>
-               <li><%= link_to "Refresh emails", gmails_refresh_emails_path %></li>
+               <li><%= link_to "Refresh emails", incoming_messages_refresh_emails_path, method: :post %></li>
       		 <% else %>
       		   <li><%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2) %></li>
       		 <% end %>
@@ -17,6 +17,3 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-
-
-

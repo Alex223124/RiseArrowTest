@@ -13,15 +13,15 @@ Rails.application.routes.draw do
   # провайдер редиректнет его к этому урл, так что мы можем исп-ть данные которые получили
   match '/auth/google_oauth2/callback', :to => 'sessions#create', via: [:get, :post]
   
-  # Кнопка refresh emails 
-  match '/gmails/refresh_emails', :to => 'gmails#refresh_emails', via: [:get, :post]
+  # refresh emails  button
+  match '/incoming_messages/refresh_emails', :to => 'incoming_messages#refresh_emails', via:  [:post]
 
   # Connect with Google link
   get '/login', :to => 'sessions#new', :as => :login 
   # Роут для логаута (кнопки логаута)
   get '/signout', :to => 'sessions#destroy', :as => :signout 
   
-  # Для ошибок если пользователь не авторизован или другая проблема
+  # For errors
   get 'auth/failure', to: redirect('/')
  
 end

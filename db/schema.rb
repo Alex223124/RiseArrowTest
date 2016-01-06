@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20160105224950) do
     t.string   "main_recipient"
     t.string   "other_recipients"
     t.integer  "user_id"
-    t.string   "attachment"
+    t.string   "attachments"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end

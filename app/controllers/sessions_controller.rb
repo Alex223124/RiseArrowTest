@@ -1,7 +1,6 @@
 class SessionsController < ApplicationController
 
- 
-  # display text and links
+    # display text and links
   def index
   end
 
@@ -9,6 +8,7 @@ class SessionsController < ApplicationController
   def create
     user = User.from_omniauth(env["omniauth.auth"])
     session[:user_id] = user.id
+    IncomingMessage.refresh_for(current_user)
     redirect_to root_path, :notice => "Signed in!"
   end
  
