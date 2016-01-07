@@ -11,21 +11,23 @@ class MailRefresher
   
   def refresh
     user.fresh_token 
-    gmail = Gmail.connect(:xoauth2, user.email, user.access_token) #  Start an authenticated gmail session
-    mails = gmail.inbox.emails(:all) # correct later to :unread!
-   
-    if mails.any? # 0 emails?
-      mails.each do |mail|
-        email = IncomingMessage.create(user_id:           user.id,
-                                       mailer:            mail_address(mail.from),
-                                       title:             NKF::nkf('-wm', mail.subject.to_s),
-                                       data:              mail.date,
-                                       main_recipient:    mail_address(mail.to),
-                                       other_recipients:  mail.in_reply_to,
-                                       attachments:       save_attaches(mail).split(","),
-                                       body:              process_body(mail))
-        #mail.mark(:read) uncomment later
-      end
+    
+    if user.access_token # for rspec tests and potential devise standart auth
+      gmail = Gmail.connect(:xoauth2, user.email, user.access_token) #  Start an authenticated gmail session
+      mails = gmail.inbox.emails(:all) # correct later to :unread!
+        if mails.any? # 0 emails?
+          mails.each do |mail|
+            email = IncomingMessage.create(user_id:           user.id,
+                                           mailer:            mail_address(mail.from),
+                                           title:             NKF::nkf('-wm', mail.subject.to_s),
+                                           data:              mail.date,
+                                           main_recipient:    mail_address(mail.to),
+                                           other_recipients:  mail.in_reply_to,
+                                           attachments:       save_attaches(mail).split(","),
+                                           body:              process_body(mail))
+            #mail.mark(:read) uncomment later
+          end
+        end
     end
   end
 
