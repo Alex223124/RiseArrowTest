@@ -10,6 +10,7 @@ class MailRefresher
   end
   
   def refresh
+    user.fresh_token 
     gmail = Gmail.connect(:xoauth2, user.email, user.access_token) #  Start an authenticated gmail session
     mails = gmail.inbox.emails(:all) # correct later to :unread!
    

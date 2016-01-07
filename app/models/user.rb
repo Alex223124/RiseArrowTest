@@ -1,12 +1,6 @@
 require 'net/http'
 require 'json'
 
-  
-# Handle ENV Variables 
-id = [Rails.application.secrets.client_id]
-secret = [Rails.application.secrets.client_secret]
-
-
 class User < ActiveRecord::Base
     
   has_many :incoming_messages
@@ -36,7 +30,6 @@ class User < ActiveRecord::Base
   end
   
 
- 
   def to_params
     {'refresh_token' => refresh_token,
     'client_id' => [Rails.application.secrets.client_id],
