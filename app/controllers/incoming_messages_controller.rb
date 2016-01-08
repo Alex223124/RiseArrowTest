@@ -8,9 +8,8 @@ class IncomingMessagesController < ApplicationController
     @incoming_messages = @user.incoming_messages.paginate(:page => params[:page], :per_page => 50)
   end
 
-  #показать одно сообщение
+  # Show one message 
   def show
-    @incoming_messages = IncomingMessage.find(params[:id])
   end
   
   # Download button

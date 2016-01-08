@@ -8,13 +8,13 @@ describe SessionsController, :type => :controller do
  
   describe "#create" do
       
+    # data from gooogle => sessions#create
     it "should successfully create a user" do
       expect {
         post :create
       }.to change{ User.count }.by(1)
     end
- 
- 
+    
     it "should successfully create a session" do
       session[:user_id].should be_nil
       post :create

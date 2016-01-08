@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   match '/auth/google_oauth2/callback', :to => 'sessions#create', via: [:get, :post]
   
   # refresh emails  button
-  match '/incoming_messages/refresh_emails', :to => 'incoming_messages#refresh_emails', via:  [:post]
+  match '/incoming_messages/refresh_emails', :to => 'incoming_messages#refresh_emails', via: [:post]
 
   # Connect with Google link
   get '/login', :to => 'sessions#new', :as => :login 
