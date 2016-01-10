@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: "incoming_messages#index"
-  get "index" => "static_pages#index", :as => :index
+  root to: "static_pages#index"
   
   resources :sessions, only: [:create, :destroy]
   

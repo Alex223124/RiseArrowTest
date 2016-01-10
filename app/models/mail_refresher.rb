@@ -15,34 +15,24 @@ class MailRefresher
     
     if user.access_token 
       gmail = Gmail.connect(:xoauth2, user.email, user.access_token) #  Start an authenticated gmail session
-      mails = gmail.inbox.emails(:unread)
+      mails = gmail.inbox.emails(:all)
         if mails.any? # 0 emails?
           mails.each do |mail|
             email = IncomingMessage.create(user_id:           user.id,
                                            mailer:            mail_address(mail.from),
-                                           title:             Mail::Encodings.value_decode(mail.subject).to_s,
+                                           title:             mail.message.subject,
                                            data:              mail.date,
                                            main_recipient:    mail_address(mail.to),
-                                           other_recipients:  recipients_decode(mail.in_reply_to),
+                                           other_recipients:  mail.message.cc,
                                            attachments:       save_attaches(mail).split(","),
                                            body:              process_body(mail))
-            mail.mark(:read)
+           # mail.mark(:read)
           end 
         end
     end
   end
   
-  
-  def recipients_decode(adr)  # formatting other recipients
-    if adr 
-      recipients = adr
-      detection = CharlockHolmes::EncodingDetector.detect(adr)
-      utf8_encoded_content = CharlockHolmes::Converter.convert recipients, detection[:encoding], 'UTF-8'
-    else
-      nil
-    end
-  end
-  
+
   def process_body(mail) # formatting body of emails
     if(mail &&  mail.text_part && mail.text_part.body)
       m = mail.text_part.body.decoded
@@ -71,6 +61,7 @@ class MailRefresher
       res.to_s
     end
   end
+  
 
   def save_attaches(mail) # saving emails attachments 
     attaches_paths = ""
