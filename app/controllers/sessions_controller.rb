@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     user = User.from_omniauth(request.env["omniauth.auth"])
     session[:user_id] = user.id
     IncomingMessage.refresh_for(current_user)
-    redirect_to incoming_messages_url, :notice => "Signed in!"
+    redirect_to root_path, :notice => "Signed in!"
   end
  
   # logout
