@@ -1,21 +1,24 @@
-<%= render 'shared/page_title', title: "Listing Incoming messages" %>
-
-<% if @incoming_messages.any? %>
-  <div class="bigbox">
-    <div class="box">
-      <table class="table-minimal">
-        <tbody>
-          <% @incoming_messages.each do |incoming_message| %>
-            <tr>
-              <%= render incoming_message %>
-            </tr>
-          <% end %>
-         </tbody>
-      </table>
+<div class="row">
+    <div class="col-lg-14 ">
+        <% if @incoming_messages.any? %>
+            <div class="mail-box">
+                <div class="table-responsive">
+                    <table class="table table-condensed">
+                        <div class="mail-box-header">
+                            <%= render 'shared/page_title', title: "Inbox" %> 
+                        </div>
+                        <p class="text-center">(<%= @incoming_messages.count %>)</p>
+                        <tbody>
+                            <% @incoming_messages.each do |incoming_message| %>
+                              <%= render incoming_message %>
+                            <% end %>                        
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <% else %>
+        <p>No emails finded.</p>
+        <% end %> 
+      <%= will_paginate @incoming_messages %>
     </div>
-  </div>
-<% else %>
-  <p>No emails finded.</p>
-<% end %> 
-<%= will_paginate @incoming_messages %>
-
+</div>

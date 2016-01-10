@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: "static_pages#index"
+  root to: "incoming_messages#index"
   
   resources :sessions, only: [:create, :destroy]
   
@@ -24,4 +24,5 @@ Rails.application.routes.draw do
   # For errors
   get 'auth/failure', to: redirect('/')
  
+
 end

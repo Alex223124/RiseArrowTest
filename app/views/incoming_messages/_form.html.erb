@@ -1,21 +1,19 @@
 <%= form_for(@incoming_message) do |f| %>
   <% if @incoming_message.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@incoming_message.errors.count, "error") %> prohibited this example from being saved:</h2>
-
-      <ul>
-      <% @incoming_message.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <h2><%= pluralize(@incoming_message.errors.count, "error") %> prohibited this example from being saved:</h2>
+        <ul>
+        <% @incoming_message.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :attachment %><br>
-    <%= f.file_field :attachment %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field">
+      <%= f.label :attachment %><br>
+      <%= f.file_field :attachment %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>

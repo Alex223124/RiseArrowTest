@@ -17,7 +17,6 @@ class User < ActiveRecord::Base
     user = User.where(:email => data["email"]).first
   
     unless user
-       #user = User.create(name: data["name"],
        user = User.create(
           email: data["email"],
           access_token: credentials["token"],
@@ -25,8 +24,8 @@ class User < ActiveRecord::Base
           expires_at: Time.at(credentials["expires_at"]).to_datetime,
           password: Devise.friendly_token[0,20] 
          )
-     end
-    user
+    end
+      user
   end
   
 

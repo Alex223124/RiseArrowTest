@@ -1,37 +1,32 @@
-<%= render 'shared/errors', obj: @incoming_messages %>
-<%= render 'shared/page_title', title: @incoming_messages.title %>
-
-
-<div class="row">
-  <div class="well col-md-8 col-md-offset-2"> 
-  
-  <p class="message_subject">Subject: <%= @incoming_messages.title %></p>
-	<p class="message_body">Body: <%= @incoming_messages.body %></p>
-	<p class="message_data">Data: <%= @incoming_messages.data %>.</p>
-	<p class="message_mailer"> Author: <%= @incoming_messages.mailer%></p>
-	
-	<% if @incoming_message.other_recipients.present? %>
-    <p class="message_recipients"> Other recipients: <%= @incoming_message.other_recipients%></p>
-  <% end %>
-  
-  <% if @incoming_message.attachments.present? %>
-  Attachments:
-    <% @incoming_message.attachments.each do |attach| %>
-      <p class="message_attachment"><%= attach %></p>
-    <% end %>
-  <% end %>
-
-	<div class="links">
-	  <%= link_to 'Back', incoming_messages_path %>
-	</div> 
-
-</div>
-
-
-      
-
-
-
-
-
-		
+<div class="col-lg-12">
+            <div class="mail-box-header">
+                <div class="mail-tools tooltip-demo m-t-md">
+                    <h3>
+                        <strong>Subject: </strong><%= @incoming_message.title %>
+                    </h3>
+                    <h5>
+                        <span class="pull-right font-noraml"><%= @incoming_message.data.to_date.to_s(:long) %></span>
+                        <strong>From: </strong><%= @incoming_message.mailer%>
+                    </h5>
+                </div>
+            </div>
+                <div class="text-left">
+                    <div class="mail-body">
+                         <%= @incoming_message.body %>
+                    </div>
+                    <div class="mail-attachment">
+                      <% if @incoming_message.other_recipients.present? %>
+                        <p class="message_recipients"><strong>Other recipients: </strong><%= @incoming_message.other_recipients%></p>
+                      <% end %>
+                      <% if @incoming_message.attachments.present? %>
+                          <strong>Attachments:</strong> 
+                        <% @incoming_message.attachments.each_with_index do |attach, number| %>
+                         <td><%= link_to "Attachment #{number + 1}", root_path + attach %></td>
+                        <% end %>
+                      <% end %>
+                    </div>
+                </div>
+                <div class="links">
+                	  <%= link_to 'Back', incoming_messages_path %>
+                </div> 
+                

@@ -9,12 +9,14 @@ require 'rspec/rails'
 
 OmniAuth.config.test_mode = true
 OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
-  :info => { :email => 'example@example.com' },
-  :credentials => {:token => '132132132132132', :refresh_token => '24124124124214', :expires_at => 1354926483}
-  })
-OmniAuth.config.mock_auth[:google_oauth2]
-
-
+                                                                    :info => { 
+                                                                              :email => 'example@example.com' 
+                                                                    },
+                                                                    :credentials => {
+                                                                                    :token => '132132132132132', 
+                                                                                    :refresh_token => '24124124124214', 
+                                                                                    :expires_at => 1354926483}
+                                                                    })
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
@@ -45,7 +47,6 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-  
   
   config.include FactoryGirl::Syntax::Methods
 end

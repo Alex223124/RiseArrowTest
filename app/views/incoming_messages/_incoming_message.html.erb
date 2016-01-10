@@ -1,18 +1,7 @@
 <%= render 'shared/errors', obj: incoming_message %>
 
-<div class="col-lg-9 animated fadeInRight">
-    <div class="mail-box">
-        <table class="table table-hover table-mail">
-            <tbody>
-                <tr class="unread">
-                    <td class="mail-ontact"><a><%= link_to(incoming_message.mailer, {:action => 'show', :id => incoming_message.id}, :class => 'action show') %></a></td>
-                    <td class="mail-ontact"><a><%= link_to( incoming_message.title, {:action => 'show', :id => incoming_message.id}, :class => 'action show') %></a></td>
-                    <td class=""><i class="fa fa-paperclip"></i></td>
-                    <td class="text-right mail-date"><%=incoming_message.data %></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
- 
+<tr>
+    <td class="mail-ontact"><a><%= link_to(incoming_message.mailer, {:action => 'show', :id => incoming_message.id}, :class => 'action show') %></a></td>
+    <td class="mail-ontact"><a><%= link_to( incoming_message.title, {:action => 'show', :id => incoming_message.id}, :class => 'action show') %></a></td>
+    <td class="text-right mail-date"><%=incoming_message.data.to_date.to_s(:long) %></td>         
+</tr>
