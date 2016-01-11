@@ -33,6 +33,7 @@ en:
     refresh_emails: 'Refresh emails'
     inbox: 'Inbox'
     footer_description: 'Test Application. Made by Alex Sologub for Rise Arrow Company. Belarus 2016.'
+    welcom: "Welcome!"
   on:
   list_of_email_updated: "Your list of emails updated!"
   signed_in: 'Signed in!'
