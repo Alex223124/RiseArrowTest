@@ -31,8 +31,8 @@ class User < ActiveRecord::Base
 
   def to_params
     {'refresh_token' => refresh_token,
-    'client_id' => [Rails.application.secrets.client_id],
-    'client_secret' => [Rails.application.secrets.client_secret],
+    'client_id' => ENV['CLIENT_ID'],
+    'client_secret' => ENV['CLIENT_SECRET'],
     'grant_type' => 'refresh_token'}
   end
   
