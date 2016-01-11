@@ -64,19 +64,19 @@ class MailRefresher
   
   def save_attaches(mail) # saving emails attachments 
     attaches_paths = ""
+    
+    Dir.mkdir('public/attachments') unless Dir.exists?('public/attachments')
+    
+    if mail.attachments.any? # true if the block ever returns a value other than false or nil
+      att_fld = SecureRandom.uuid
+      Dir::mkdir('public/attachments/' + att_fld)
 
-    Dir.chdir(Rails.root) do
-      if mail.attachments.any? # true if the block ever returns a value other than false or nil
-        att_fld = SecureRandom.uuid
-        Dir::mkdir('public/attachments/' + att_fld)
-  
-        mail.attachments.each do |attach|
-          File.open('public/attachments/' + att_fld + '/' + attach.filename, 'w') do |attach_file|
-            attach_file.binmode
-            attach_file.write attach.body   #.decoded
-            attaches_paths += ',' if !attaches_paths.empty?
-            attaches_paths += 'attachments/' + att_fld + '/' + attach.filename 
-          end
+      mail.attachments.each do |attach|
+        File.open('public/attachments/' + att_fld + '/' + attach.filename, 'w') do |attach_file|
+          attach_file.binmode
+          attach_file.write attach.body   #.decoded
+          attaches_paths += ',' if !attaches_paths.empty?
+          attaches_paths += 'attachments/' + att_fld + '/' + attach.filename 
         end
       end
     end
