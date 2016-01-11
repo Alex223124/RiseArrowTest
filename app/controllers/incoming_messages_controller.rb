@@ -25,7 +25,7 @@ class IncomingMessagesController < ApplicationController
   # Refresh button
   def refresh_emails
     IncomingMessage.refresh_for(current_user)
-    redirect_to incoming_messages_path, notice: "Your list of emails updated!"
+    redirect_to incoming_messages_path, notice: t(:list_of_email_updated) 
   end
 
 

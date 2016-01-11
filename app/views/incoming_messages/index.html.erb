@@ -5,7 +5,7 @@
                 <div class="table-responsive">
                     <table class="table table-condensed">
                         <div class="mail-box-header">
-                            <%= render 'shared/page_title', title: "Inbox" %> 
+                            <%= render 'shared/page_title', title: "#{ t("un.inbox") }" %> 
                         </div>
                         <p class="text-center">(<%= @incoming_messages.count %>)</p>
                         <tbody>
@@ -19,6 +19,6 @@
         <% else %>
         <p>No emails finded.</p>
         <% end %> 
-      <%= will_paginate @incoming_messages %>
-    </div>
+        <%= will_paginate @incoming_messages, :previous_label => t("will_paginate.previous_label"), :next_label => t("will_paginate.next_label") %>
+   </div>
 </div>

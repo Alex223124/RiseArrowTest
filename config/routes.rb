@@ -25,5 +25,4 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
  
 
-
 end

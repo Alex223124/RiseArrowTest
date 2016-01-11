@@ -2,31 +2,31 @@
             <div class="mail-box-header">
                 <div class="mail-tools tooltip-demo m-t-md">
                     <h3>
-                        <strong>Subject: </strong><%= @incoming_message.title %>
+                        <strong><%= IncomingMessage.human_attribute_name("title")%></strong><%= @incoming_message.title%>
                     </h3>
                     <h5>
-                        <span class="pull-right font-noraml"><%= @incoming_message.data.to_date.to_s(:long) %></span>
-                        <strong>From: </strong><%= @incoming_message.mailer%>
+                        <span class="pull-right font-noraml"><%= @incoming_message.data.strftime("%d-%m-%Y")%></span>
+                        <strong><%= IncomingMessage.human_attribute_name("mailer")%></strong><%= @incoming_message.mailer%>
                     </h5>
                 </div>
             </div>
-                <div class="text-left">
-                    <div class="mail-body">
-                         <%= @incoming_message.body %>
-                    </div>
-                    <div class="mail-attachment">
-                      <% if @incoming_message.other_recipients.present? %>
-                        <p class="message_recipients"><strong>Other recipients: </strong><%= @incoming_message.other_recipients%></p>
-                      <% end %>
-                      <% if @incoming_message.attachments.present? %>
-                          <strong>Attachments:</strong> 
-                        <% @incoming_message.attachments.each_with_index do |attach, number| %>
-                         <td><%= link_to "Attachment #{number + 1}", root_path + attach %></td>
-                        <% end %>
-                      <% end %>
-                    </div>
+            <div class="text-left">
+                <div class="mail-body">
+                     <%= @incoming_message.body %>
                 </div>
-                <div class="links">
-                	  <%= link_to 'Back', incoming_messages_path %>
-                </div> 
-                
+                <div class="mail-attachment">
+                  <% if @incoming_message.other_recipients.present? %>
+                    <p class="message_recipients"><strong><%= IncomingMessage.human_attribute_name("other_recipients")%></strong><%= @incoming_message.other_recipients%></p>
+                  <% end %>
+                  <% if @incoming_message.attachments.present? %>
+                      <strong><%= IncomingMessage.human_attribute_name("attachments")%></strong> 
+                    <% @incoming_message.attachments.each_with_index do |attach, number| %>
+                     <td><%= link_to "#{IncomingMessage.human_attribute_name("attachment")}#{number + 1}", root_path + attach %></td>
+                    <% end %>
+                  <% end %>
+                </div>
+            </div>
+            <div class="links">
+            	  <%= link_to "#{t("un.back")}", incoming_messages_path %>
+            </div> 
+

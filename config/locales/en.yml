@@ -20,4 +20,42 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  will_paginate:
+    previous_label: "&#8592; Previous1"
+    next_label: "Next &#8594;"
+    page_gap: "&hellip1;"
+  un: 
+    back: 'back'
+    exit: 'Sign out '
+    title: 'Test Application for RiseArrow'
+    login: 'Sign in with Google'
+    language: 'Language' 
+    refresh_emails: 'Refresh emails'
+    inbox: 'Inbox'
+    footer_description: 'Test Application. Made by Alex Sologub for Rise Arrow Company. Belarus 2016.'
+  on:
+  list_of_email_updated: "Your list of emails updated!"
+  signed_in: 'Signed in!'
+  signet_out: "Signed out!"
+  failure: "Sorry, but you didn't allow access to our app!"
+  activerecord:
+    models:
+      incoming_message: 'Incoming Message'
+    attributes:
+      incoming_message:
+        mailer: 'From: '
+        title: 'Subject: '
+        body: 'Content: '
+        data: 'Data: '
+        main_recipient: 'To: '
+        other_recipients: 'Carbon copy: '
+        attachment: 'Attachment ' 
+        attachments: 'Attachments: '
+      user:
+        email: 'email: '
+  errors:
+    messages:
+      record_invalid: 'Please correct the following errors: %{errors}'
+    
+    
+    
