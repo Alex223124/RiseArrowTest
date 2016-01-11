@@ -21,7 +21,7 @@
                   <% if @incoming_message.attachments.present? %>
                       <strong><%= IncomingMessage.human_attribute_name("attachments")%></strong> 
                     <% @incoming_message.attachments.each_with_index do |attach, number| %>
-                     <td><%= link_to "#{IncomingMessage.human_attribute_name("attachment")}#{number + 1}", root_path + attach %></td>
+                     <td><%= link_to "#{IncomingMessage.human_attribute_name("attachment")}#{number + 1}", asset_path(attach) %></td>
                     <% end %>
                   <% end %>
                 </div>
