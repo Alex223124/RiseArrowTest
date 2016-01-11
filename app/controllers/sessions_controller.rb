@@ -6,7 +6,6 @@ class SessionsController < ApplicationController
     session[:user_id] = user.id
     IncomingMessage.refresh_for(current_user)
     redirect_to incoming_messages_path, notice: t(:signed_in)
-    
   end
  
   # logout
@@ -19,5 +18,4 @@ class SessionsController < ApplicationController
    redirect_to root_path, notice: t(:failure)
   end
 
- 
 end

@@ -5,7 +5,7 @@ class IncomingMessage < ActiveRecord::Base
   
   belongs_to :user
   
-    scope :newest_first, lambda { order("incoming_messages.created_at DESC")}
+  scope :newest_first, lambda { order("incoming_messages.created_at DESC")}
   
   def self.refresh_for(user)
     MailRefresher.new(user).refresh

@@ -12,11 +12,6 @@ class IncomingMessagesController < ApplicationController
   def show
   end
   
-  # Download button
-  def download
-    send_data(@incoming_message.attachments) 
-  end
-
   def destroy
     @incoming_message.destroy
     redirect_to incoming_messages_url, notice: 'Message was successfully destroyed.'
@@ -28,15 +23,14 @@ class IncomingMessagesController < ApplicationController
     redirect_to incoming_messages_path, notice: t(:list_of_email_updated) 
   end
 
-
   private
 
-    def set_user
-      @user = User.find(current_user.id)
-    end
+  def set_user
+    @user = User.find(current_user.id)
+  end
     
-    def set_incoming_message
-      @incoming_message = IncomingMessage.find(params[:id])
-    end
+  def set_incoming_message
+    @incoming_message = IncomingMessage.find(params[:id])
+  end
     
 end

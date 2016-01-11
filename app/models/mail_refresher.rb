@@ -15,7 +15,7 @@ class MailRefresher
     
     if user.access_token 
       gmail = Gmail.connect(:xoauth2, user.email, user.access_token) #  Start an authenticated gmail session
-      mails = gmail.inbox.emails(:all)
+      mails = gmail.inbox.emails(:unread)
         if mails.any? # 0 emails?
           mails.each do |mail|
             email = IncomingMessage.create(user_id:           user.id,
@@ -26,7 +26,7 @@ class MailRefresher
                                            other_recipients:  mail.message.cc,
                                            attachments:       save_attaches(mail).split(","),
                                            body:              process_body(mail))
-           # mail.mark(:read)
+            mail.mark(:read)
           end 
         end
     end
@@ -62,7 +62,6 @@ class MailRefresher
     end
   end
   
-
   def save_attaches(mail) # saving emails attachments 
     attaches_paths = ""
 
